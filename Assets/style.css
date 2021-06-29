@@ -1,0 +1,58 @@
+/* adding root color variable to call on */
+:root {
+    --addColor: rgb(161, 27, 27); 
+}
+
+/* placed scores and timer at top corners of page */
+.scores {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 120%;
+}
+
+.timer {
+    font-size: 120%;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+a {
+    color: var(--addColor);
+}
+
+body {
+    font-family: serif;
+    font-size: larger;
+    margin: 10px;
+}
+
+.page-wrapper {
+    margin: 100px auto 40px auto;
+    max-width: 750px;    
+}
+
+/* hiding any classes with "hide" */
+.hide {
+    display: none;
+}
+
+.start {
+    text-align: center;
+}
+
+/* add CSS to all buttons */
+button {
+    display: inline;
+    margin: 10px;
+    font-size: 120%;
+    background-color: var(--addColor);
+    color: white;
+    border-radius: 8%;
+}
+
+
+  
+
+
