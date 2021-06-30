@@ -50,14 +50,25 @@ function getCurrentQuestion () {
 
         choiceNode.textContent = i + 1 + ". " + currentQuestion.choices[i];
 
-        choiceNode.onclick = answerClick();
         questionChoices.appendChild(choiceNode);
     }
+        questionChoices.children[0].addEventListener("click", function(event){
+            answerClick(questionChoices.children[0]);
+        });
+        questionChoices.children[1].addEventListener("click", function(event){
+            answerClick(questionChoices.children[1]);
+        });
+        questionChoices.children[2].addEventListener("click", function(event){
+            answerClick(questionChoices.children[2]);
+        });
+        questionChoices.children[3].addEventListener("click", function(event){
+            answerClick(questionChoices.children[3]);
+        });
 };
 
 
-function answerClick() {
-    if (this.value != questions[currentQuestionIndex].answer) {
+function answerClick(userAnswer) {
+    if (userAnswer.textContent != questions[currentQuestionIndex].answer) {
         time -= 10;
         feedbackEl.textContent = "Nope!";
         timerEl.textContent = time;
@@ -94,7 +105,7 @@ function endQuiz () {
     questionsEl.setAttribute("class", "hide");
 }
 
-function listScores () {
+function saveScores () {
     var initials = document.getElementById("initials");
 
     if (initials.length > 3) {
@@ -114,5 +125,5 @@ function listScores () {
 }
 
 
-submitBtn.addEventListener("click", listScores)
+submitBtn.addEventListener("click", saveScores)
 startBtn.addEventListener("click", startQuiz)
