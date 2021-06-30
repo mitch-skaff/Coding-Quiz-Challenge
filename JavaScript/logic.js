@@ -67,8 +67,9 @@ function getCurrentQuestion () {
 };
 
 
-function answerClick(userAnswer) {
-    if (userAnswer.textContent != questions[currentQuestionIndex].answer) {
+function answerClick(answerChoice) {
+    console.log(answerChoice);
+    if (answerChoice.textContent !== questions[currentQuestionIndex].answer) {
         time -= 10;
         feedbackEl.textContent = "Nope!";
         timerEl.textContent = time;
@@ -106,7 +107,7 @@ function endQuiz () {
 }
 
 function saveScores () {
-    var initials = document.getElementById("initials");
+    var initials = document.querySelector("#initials");
 
     if (initials.length > 3) {
         alert("Initials must be 3 characters or less!")
@@ -114,13 +115,13 @@ function saveScores () {
     else {
         highScores = [];
 
-        let recentScore = {initials: initals, score: time}
+        let recentScore = {initials: initials, score: time}
     
 
     highScores.push(recentScore);
 
     localStorage.setItem("highScores", JSON.stringify(highScores));
-    window.location.href = "score.html";
+    window.location.href = "highscores.html";
     }
 }
 
