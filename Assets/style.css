@@ -44,12 +44,17 @@ body {
 
 /* add CSS to all buttons */
 button {
-    display: inline;
+    display: inline-block;
     margin: 10px;
     font-size: 120%;
     background-color: var(--addColor);
     color: white;
     border-radius: 8%;
+}
+
+.choices button {
+    display: block;
+    text-align: center;
 }
 
 

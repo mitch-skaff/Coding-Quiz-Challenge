@@ -4,7 +4,7 @@ var currentQuestionIndex = 0;
 var endScreen = document.querySelector("#end");
 var finalScore = document.querySelector("#final-score");
 var startScreen = document.querySelector("#start-screen");
-var titleEl = document.querySelector("questions-title")
+var titleEl = document.querySelector("#questions-title")
 var startBtn = document.querySelector("#start");
 var submitBtn = document.querySelector("#submit");
 var questionsEl = document.querySelector("#questions");
@@ -12,6 +12,8 @@ var timerEl = document.querySelector("#time");
 var questionChoices = document.querySelector("#choices");
 var feedbackEl = document.querySelector("#feedback");
 var initialsInput = document.querySelector("#initials");
+
+var timerId;
 
 // create start quiz function that will hide start screen and bring up questions/set time interval
 function startQuiz() {
@@ -39,25 +41,43 @@ function getCurrentQuestion () {
     var currentQuestion = questions[currentQuestionIndex];
     
     titleEl.textContent = currentQuestion.title;
-    questionsChoices.innerHTML = "";
+    questionChoices.innerHTML = "";
 
-    for (var i = 0; i < currentQuestion.choice.length; i++) {
+    for (var i = 0; i < currentQuestion.choices.length; i++) {
         var choiceNode = document.createElement("button");
         choiceNode.setAttribute("class", "choice");
-        choiceNode.setAttribute("value", currentQuestion.choice[i]);
+        choiceNode.setAttribute("value", currentQuestion.choices[i]);
 
-        choiceNode.textContent = i + 1 + ". " + currentQuestion.choice[i];
+        choiceNode.textContent = i + 1 + ". " + currentQuestion.choices[i];
 
+        choiceNode.onclick = answerClick();
         questionChoices.appendChild(choiceNode);
-    
-
     }
-
 };
 
-function questionClick () {
 
-}
+function answerClick() {
+    if (this.value != questions[currentQuestionIndex].answer) {
+        time -= 10;
+        feedbackEl.textContent = "Nope!";
+        timerEl.textContent = time;
+    } else {
+        feedbackEl.textContent = "You got it!";
+    }
+
+    feedbackEl.setAttribute("class", "feedback")
+    setInterval(function() {
+        feedbackEl.setAttribute("class", "feedback hide")
+    }, 1000);
+
+    currentQuestionIndex++
+
+    if (currentQuestionIndex === questions.length) {
+        endQuiz();
+    } else {
+        getCurrentQuestion();
+    }
+};
 
 // creating function to bring up end screen and create final score
 function endQuiz () {
