@@ -37,6 +37,8 @@ function timeRun() {
     if (time === 0) endQuiz();
 }
 
+// get current question and choices, add even listeners to each choice
+
 function getCurrentQuestion () {
     var currentQuestion = questions[currentQuestionIndex];
     
@@ -66,6 +68,7 @@ function getCurrentQuestion () {
         });
 };
 
+// check is users answer matches the correct answer
 
 function answerClick(answerChoice) {
     console.log(answerChoice);
@@ -77,13 +80,17 @@ function answerClick(answerChoice) {
         feedbackEl.textContent = "You got it!";
     }
 
+    // display feedback for a second on page
     feedbackEl.setAttribute("class", "feedback")
     setInterval(function() {
         feedbackEl.setAttribute("class", "feedback hide")
     }, 1000);
 
+    // move on to next question once user clicks on their answer
     currentQuestionIndex++
 
+
+    // if the current question equals the total amount of questions, then end quiz
     if (currentQuestionIndex === questions.length) {
         endQuiz();
     } else {
@@ -106,6 +113,7 @@ function endQuiz () {
     questionsEl.setAttribute("class", "hide");
 }
 
+// save initials to local storage
 function saveScores () {
     var initials = document.querySelector("#initials");
 
@@ -125,6 +133,6 @@ function saveScores () {
     }
 }
 
-
+// event listeners for submitBtn and startBtn
 submitBtn.addEventListener("click", saveScores)
 startBtn.addEventListener("click", startQuiz)
